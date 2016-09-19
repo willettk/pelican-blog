@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="Kyle Willett" />
+<meta name="description" content="I played a lot of quiz bowl as a undergrad in college, and one of the ways our team practiced was in memorizing specific lists of knowledge that we knew came up often in competition (yay data). One area that was always useful across the board was the Nobel Prizes ..." />
+<meta name="keywords" content="nobel, maps, R">
+<meta property="og:site_name" content="Kyle Willett - Blog"/>
+<meta property="og:title" content="Global Movement of the Nobel Laureates"/>
+<meta property="og:description" content="I played a lot of quiz bowl as a undergrad in college, and one of the ways our team practiced was in memorizing specific lists of knowledge that we knew came up often in competition (yay data). One area that was always useful across the board was the Nobel Prizes ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./nobelmaps.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-09-18 18:00:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/kyle-willett.html">
+<meta property="article:section" content="Data science"/>
+<meta property="article:tag" content="nobel"/>
+<meta property="article:tag" content="maps"/>
+<meta property="article:tag" content="R"/>
+<meta property="og:image" content="">
+
+  <title>Kyle Willett - Blog &ndash; Global Movement of the Nobel Laureates</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="./theme/img/profile.png" alt="Kyle Willett" title="Kyle Willett">
+      </a>
+      <h1><a href=".">Kyle Willett</a></h1>
+
+<p>Data Scientist</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://willettk.github.io" target="_blank">main homepage</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-twitter" href="http://twitter.com/kwwillett" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-github" href="http://github.com/willettk" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/willettk" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href=".">    Home
+</a>
+
+      <a href="archives.html">Archives</a>
+      <a href="categories.html">Categories</a>
+      <a href="tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="nobelmaps">Global Movement of the Nobel Laureates</h1>
+    <p>
+          Posted on 18 Sep 2016 in <a href="./category/data-science.html">Data science</a>
+
+
+    </p>
+  </header>
+  <div>
+    <p>I played a lot of <a href="https://www.naqt.com/about-quiz-bowl.html">quiz bowl</a> as a undergrad in college, and one of the ways our team practiced was in memorizing specific lists of knowledge that we knew came up often in competition (yay data). One area that was always useful across the board was the <a href="https://en.wikipedia.org/wiki/Nobel_Prize">Nobel Prizes</a>, and I spent a lot of time learning about the history of science and medicine, the various laudatory efforts in the name of peace, and reading books by authors I'd have probably never otherwise approached (<em>literary criticism of the Nobel laureates to follow in some separate forum</em>). &nbsp;</p>
+<p>So what do the Nobel Prizes have to do with data science? The <a href="http://www.nobel.se">Nobel foundation</a> has an <a href="http://www.nobelprize.org/nobel_organizations/nobelmedia/nobelprize_org/developer/">API</a>, which can be used to download all the data they've collected on everyone who's received a Nobel Prize. The database includes basic information like date and place of birth and death, details on which prize they won, and the subjects of their work. It's an interesting dataset to try and work with.&nbsp;</p>
+<p>My first pass at working with this data centered on geography. Policy related to funding of basic science is an important issue to me, and there's an increasing discussion about the exchange of talent (think "brain drain") taking place between Europe, Asia, and the rest of the world. Using the Nobel data, I thought it'd be interesting to explore where the world's most prominent scientists, authors, and peacemakers ended up over the course of their lifetimes.&nbsp;</p>
+<p><strong>Methods</strong>: I used a <a href="https://github.com/vibragiel/nobel">Python wrapper</a> to query the Nobel API and format the data for my queries, and then made the maps below in R following examples from <a href="http://flowingdata.com/2011/05/11/how-to-map-connections-with-great-circles/">Flowing Data</a>. All of my code is available on <a href="https://github.com/willettk/nobel">Github here</a>.</p>
+<p><strong>Results</strong>: I made two maps showing the lifetime emigration of Nobel laureates. Lines between (present-day) countries indicate the number of Nobel laureates who were born in the first country and died in the second. Arrows follow the direction of emigration; lines of darker green indicate more people shared the same birth/death countries. If the countries of birth and death were the same for a laureate, or if no death location is given in the database (presumably someone who is still alive), the country is marked with an orange circle. The size of the circle is proportional to the total number of living + homebody laureates from that country.&nbsp;</p>
+<p><img alt="image" src="images/nobelmap_big.png" /></p>
+<p>So what does this show? Historically, Nobel Prizes were predominantly awarded to (and by) northern and western Europeans, with a big shift to laureates from the U.S. (and China and Japan, to a lesser extent) only in the last fifty years. This map confirms that. For paths, the most common trans-continental tracks are between the US and various European countries. The most common link is from the UK-&gt;US; eight scientists born in Great Britain emigrated to the US and later died there.&nbsp;</p>
+<p>For the tracks in the less-represented parts of the world (Latin America, Africa, Oceania, the Middle East, and South Asia), the majority are for net emigration. This was often the result of European-ancestry children born abroad and then moving back for their education and later careers (eg, <a href="https://en.wikipedia.org/wiki/Peter_Medawar">Peter Medawar</a>, <a href="https://en.wikipedia.org/wiki/Walter_Houser_Brattain">Walter Brattain</a>, <a href="https://en.wikipedia.org/wiki/Claude_Simon">Claude Simon</a>), especially for the early parts of the 20th century when much of the world still had extant or recent colonial ties.&nbsp;</p>
+<p>More recently, laureates are staying in their native countries and many fewer are emigrating from the US or Europe. Some of the exceptions to this are tragedies &mdash; for example, the unusual link from Sweden to Zambia shows where Nobel Peace Prize laureate&nbsp;Dag Hammarskjöld died in a plane crash in 1961.&nbsp;</p>
+<p>I made a version of the same map zoomed in on Europe, which is quite a bit more complicated. There's an excess of paths and nodes connected to Switzerland, partly due to its hosting of several international organizations and partly due to net emigration after World War II, I'd guess. France, Germany, and the UK are the most well-represented countries in this group, and all have significant emigration links to the US.</p>
+<p><img alt="image" src="images/nobelmap_europe.png" /></p>
+<p>There's quite a lot in this data that demands a more careful analysis: </p>
+<ul>
+<li>There's the big issue of time; 113 years of data are collapsed into one map, and patterns would look very different for today vs. the early 20th century. </li>
+<li>There's also the effect of survivor bias, and the fact I'm combining possible emigrants with those who stayed just because they haven't died yet. </li>
+<li>Splitting the data by cohort (category of prize) would also be interesting; the Nobel Peace Prize has a much higher proportion of laureates from lower-HDI countries than the science or medicine prizes, for example.</li>
+<li>Maybe the biggest caveat is that these results are only based on location of birth and death &mdash; this doesn't tell you where a scientist did his/her work, the cultures that might be the basis for an author's books, or the locations in which recipients have been working to keep the peace. That's a much larger task, and I don't think the contents of the Nobel API alone have enough data to accurately probe that. Some type of natural language processing on content from either the <a href="http://www.nobelprize.org/nobel_prizes/literature/laureates/1993/morrison-bio.html">official Nobel biography</a> or sources like <a href="https://en.wikipedia.org/wiki/Toni_Morrison">Wikipedia</a> would be an interesting next step.</li>
+</ul>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/nobel.html">nobel</a>
+      <a href="./tag/maps.html">maps</a>
+      <a href="./tag/r.html">R</a>
+    </p>
+  </div>
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; Kyle Willett 2016 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Kyle Willett - Blog ",
+  "url" : ".",
+  "image": "",
+  "description": "Projects and Diversions of Kyle Willett"
+}
+</script>
+</body>
+</html>
