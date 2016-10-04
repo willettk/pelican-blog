@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="Kyle Willett" />
+<meta name="description" content="I really love the US National Park System — I think it's one of the best things about our country. The 400+ sites administered by the National Park Service (NPS) covers a huge range of natural and historical importance. Since 2016 is the 100th anniversary of the National Park Service ..." />
+<meta name="keywords" content="nps, maps, python">
+<meta property="og:site_name" content="Kyle Willett - Blog"/>
+<meta property="og:title" content="How Far Can You Be From a National Park?"/>
+<meta property="og:description" content="I really love the US National Park System — I think it's one of the best things about our country. The 400+ sites administered by the National Park Service (NPS) covers a huge range of natural and historical importance. Since 2016 is the 100th anniversary of the National Park Service ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./furthestnp.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-10-04 18:00:00-04:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/kyle-willett.html">
+<meta property="article:section" content="Data science"/>
+<meta property="article:tag" content="nps"/>
+<meta property="article:tag" content="maps"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="">
+
+  <title>Kyle Willett - Blog &ndash; How Far Can You Be From a National Park?</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="./theme/img/profile.png" alt="Kyle Willett" title="Kyle Willett">
+      </a>
+      <h1><a href=".">Kyle Willett</a></h1>
+
+<p>Data Scientist</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://willettk.github.io" target="_blank">main homepage</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-twitter" href="http://twitter.com/kwwillett" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-github" href="http://github.com/willettk" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/willettk" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href=".">    Home
+</a>
+
+      <a href="archives.html">Archives</a>
+      <a href="categories.html">Categories</a>
+      <a href="tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="furthestnp">How Far Can You Be From a National Park?</h1>
+    <p>
+          Posted on 04 Oct 2016 in <a href="./category/data-science.html">Data science</a>
+
+
+    </p>
+  </header>
+  <div>
+    <p>I really love the US National Park System &mdash; I think it's one of the best things about our country. The 400+ sites administered by the <a href="https://www.nps.gov">National Park Service (NPS)</a> covers a huge range of natural and historical importance. Since 2016 is the <a href="https://www.nps.gov/subjects/centennial/index.htm">100th anniversary</a> of the National Park Service, I thought it'd be a good opportunity to tackle a long-standing question I've had about the National Parks. </p>
+<p>My wife is originally from Iowa, which is in a portion of the country that's not always celebrated for its natural wonders. While that's a relatively subjective statement, there are way fewer NPS sites in the Midwest than other parts of the country. For example, Iowa has only <a href="https://www.nps.gov/state/ia/index.htm">four NPS sites</a>, none of which are National Parks; in contrast, our former home of Colorado has <a href="https://www.nps.gov/state/co/index.htm">sixteen sites</a>, including four National Parks. My wife has claimed offhand several times that growing up in Iowa, she was as far as one could be in the US from a National Park. Is that true?</p>
+<p>This is a pretty quantitative question, and one that I thought I could answer. Here are the assumptions I made:</p>
+<ul>
+<li>For unique sites, I'm considering only the units designated as <strong>National Parks</strong> (as opposed to National Memorials, National Monuments, National Seashores, etc). They're all sites administered by the NPS, but National Parks have a particular appeal, and they're usually among the largest, most well-known, and/or most-visited sites in the NPS.</li>
+<li>To simplify the query, I limited the area to the <strong>48 states</strong> of the continental US. That means I'm eliminating a number of parks from my list: eight in Alaska, two in Hawai'i, and one each in the US Virgin Islands and American Samoa. That leaves a total of 47 National Parks to consider.</li>
+<li>While the parks all have finite boundaries and can be extremely large (<a href="https://www.nps.gov/wrst/index.htm">Wrangell-St. Elias National Park</a> is bigger than Switzerland, for example), I'm treating the distance to each park to be a <strong>single point</strong> at its geographic center.</li>
+<li>The "furthest distance" is considered <strong>as the crow flies</strong>, not driving directions. That makes the problem simpler and allows me to include parks like <a href="https://www.nps.gov/isro/index.htm">Isle Royale</a>, <a href="https://www.nps.gov/chis/index.htm">Channel Islands</a>, and <a href="https://www.nps.gov/drto/index.htm">Dry Tortugas</a>, all of which are located on islands that require air or water transport.</li>
+</ul>
+<p>I thought of a couple of different ways to actually solve the problem. The most elegant way would probably be to do a Voronoi tessellation of the 47 park locations. <a href="https://en.wikipedia.org/wiki/Voronoi_diagram">Voronoi diagrams</a> partition a plane based on the distance to a set of points within it. Each convex cell encloses an area that's closest to that point compared to any of the others. The Voronoi cells can be intersected with the exterior polygon of the US to provide the outer boundary. Once that's done, then the point furthest from <strong>any</strong> National Park must be either a vertex between adjoining Voronoi cells or a vertex between cells and the outer boundary. The distance between those vertices and the points in adjoining cells can individually checked in O(V) time. </p>
+<p>There are several different software packages that could make this happen, but a couple hours work didn't end up getting me a solution I was happy with. Python has some capability to handle cartographic data via basemap, but I couldn't get the package to install due to trouble with C compilers. R can also make Voronoi/Dirichlet tessellations, but I couldn't end up making a single non-intersecting polygon of the US border to serve as the outer boundary. I could have coded this all from scratch, but decided to leave it in the interests of time.</p>
+<p>I ultimately used Python to find the answer in a brute-force approach <a href="https://github.com/willettk/national-parks">(code is on Github)</a>. I simply gridded the US and computed the distance to every Park, keeping only the lowest distance. Definitely inefficient, but it gets the job done. And here's the map!</p>
+<p><img alt="image" src="images/furthest_np_map.png" /></p>
+<p>The red star shows the point furthest form any National Park (93.53 W, 41.58 N). As my wife predicted, it is indeed in Iowa &mdash; pretty much straight over the capital city of Des Moines, as it turns out. It's roughly equidistant between <a href="https://www.nps.gov/badl/index.htm">Badlands National Park</a> in South Dakota, <a href="https://www.nps.gov/voya/index.htm">Voyageurs National Park</a> in Minnesota, and <a href="https://www.nps.gov/hosp/index.htm">Hot Springs National Park</a> in Arkansas, about 760 km away.</p>
+<p>The encouraging coda to this is that, according to Google Maps, it's only about <a href="https://www.google.com/maps/dir/Des+Moines,+IA/Badlands+National+Park,+South+Dakota/@42.6226276,-102.3301453,6z/data=!3m1!4b1!4m13!4m12!1m5!1m1!1s0x87ee99a4c1611ee7:0x710028512691e4b2!2m2!1d-93.6091064!2d41.6005448!1m5!1m1!1s0x877e870c18052023:0x69685e31dae677f0!2m2!1d-102.3396912!2d43.8553804">an eight-hour drive</a> from this "pole of inaccessibility" to the Badlands. So everyone in the lower 48 does live within a day's drive of a National Park. :)</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/nps.html">nps</a>
+      <a href="./tag/maps.html">maps</a>
+      <a href="./tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; Kyle Willett 2016 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Kyle Willett - Blog ",
+  "url" : ".",
+  "image": "",
+  "description": "Projects and Diversions of Kyle Willett"
+}
+</script>
+</body>
+</html>
