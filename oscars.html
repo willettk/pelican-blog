@@ -1,0 +1,255 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="./theme/stylesheet/style.min.css">
+
+  <link rel="stylesheet" type="text/css" href="./theme/pygments/github.min.css">
+  <link rel="stylesheet" type="text/css" href="./theme/font-awesome/css/font-awesome.min.css">
+
+
+
+
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+    <!-- Chrome, Firefox OS and Opera -->
+    <meta name="theme-color" content="#333">
+    <!-- Windows Phone -->
+    <meta name="msapplication-navbutton-color" content="#333">
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<meta name="author" content="Kyle Willett" />
+<meta name="description" content="It's really easy to identify important subjects or people only with those that win prizes: books that won the Pulitzer, or authors that won the Nobel Prize. Appropriate recognition and appreciation is never universal, but almost always requires some time and evaluation in a historical context. Some prize-winners are ..." />
+<meta name="keywords" content="oscars, movies, imdb, python">
+<meta property="og:site_name" content="Kyle Willett - Blog"/>
+<meta property="og:title" content="The Most Star-Studded Movie of All Time"/>
+<meta property="og:description" content="It's really easy to identify important subjects or people only with those that win prizes: books that won the Pulitzer, or authors that won the Nobel Prize. Appropriate recognition and appreciation is never universal, but almost always requires some time and evaluation in a historical context. Some prize-winners are ..."/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:url" content="./oscars.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2016-11-24 18:00:00-05:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="./author/kyle-willett.html">
+<meta property="article:section" content="Data science"/>
+<meta property="article:tag" content="oscars"/>
+<meta property="article:tag" content="movies"/>
+<meta property="article:tag" content="imdb"/>
+<meta property="article:tag" content="python"/>
+<meta property="og:image" content="">
+
+  <title>Kyle Willett - Blog &ndash; The Most Star-Studded Movie of All Time</title>
+</head>
+<body>
+  <aside>
+    <div>
+      <a href=".">
+        <img src="./theme/img/profile.png" alt="Kyle Willett" title="Kyle Willett">
+      </a>
+      <h1><a href=".">Kyle Willett</a></h1>
+
+<p>Data Scientist</p>
+      <nav>
+        <ul class="list">
+          <li><a href="./pages/about.html#about">About</a></li>
+
+          <li><a href="https://willettk.github.io" target="_blank">main homepage</a></li>
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li><a class="sc-twitter" href="http://twitter.com/kwwillett" target="_blank"><i class="fa fa-twitter"></i></a></li>
+        <li><a class="sc-github" href="http://github.com/willettk" target="_blank"><i class="fa fa-github"></i></a></li>
+        <li><a class="sc-linkedin" href="https://www.linkedin.com/in/willettk" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+      </ul>
+    </div>
+  </aside>
+  <main>
+    <nav>
+      <a href=".">    Home
+</a>
+
+      <a href="archives.html">Archives</a>
+      <a href="categories.html">Categories</a>
+      <a href="tags.html">Tags</a>
+
+
+    </nav>
+
+<article class="single">
+  <header>
+    <h1 id="oscars">The Most Star-Studded Movie of All Time</h1>
+    <p>
+          Posted on 24 Nov 2016 in <a href="./category/data-science.html">Data science</a>
+
+
+    </p>
+  </header>
+  <div>
+    <p>It's really easy to identify important subjects or people only with those that win prizes: books that won the Pulitzer, or authors that won the Nobel Prize. Appropriate recognition and appreciation is never universal, but almost always requires some time and evaluation in a historical context. Some prize-winners are horribly embarrassing in hindsight: frontal lobotomies winning the Nobel Prize in Medicine, Henry Kissinger and the Nobel Peace Prize, <em>Crash</em> over <em>Brokeback Mountain</em> for Best Picture. Similarly, many have been overlooked in their lifetimes for genius-level accomplishments: Einstein never won a Nobel Prize for relativity; <em>Citizen Kane</em> didn't win Best Picture or Best Director; Leo Tolstoy, Virginia Woolf, and Chinua Achebe never won the Nobel Prize. </p>
+<p>So while counting people who've only won specific awards is never an exercise in pure quality, it does give a discrete data set. And I like to play with data. Following the <a href="https://en.wikipedia.org/wiki/88th_Academy_Awards">88th Academy Awards</a>, a question popped into my head that I thought it'd be fun to answer:</p>
+<blockquote>
+<p><em>"Which movie had the most Oscar winners in its cast?"</em></p>
+</blockquote>
+<p>My assumptions:</p>
+<ul>
+<li>This only counts individuals who won competitive Academy Awards for <a href="https://en.wikipedia.org/wiki/Academy_Award_for_Best_Actor">Best Actor</a>, <a href="https://en.wikipedia.org/wiki/Academy_Award_for_Best_Actress">Best Actress</a>, <a href="https://en.wikipedia.org/wiki/Academy_Award_for_Best_Supporting_Actor">Best Supporting Actor</a>, or <a href="https://en.wikipedia.org/wiki/Academy_Award_for_Best_Supporting_Actress">Best Supporting Actress</a>. I'm not counting people who only won an <a href="https://en.wikipedia.org/wiki/Academy_Honorary_Award">Academy Honorary Award</a> or <a href="https://en.wikipedia.org/wiki/Academy_Juvenile_Award">Academy Juvenile Award</a>.</li>
+<li>Only people who won an acting Oscar are considered. Many well-known actors have won Academy Awards in other categories (<em>e.g.</em>, <strong>Mel Gibson</strong> and <strong>Kevin Costner</strong> for directing; <strong>Woody Allen</strong>, <strong>Emma Thompson</strong>, and <strong>Matt Damon</strong> for screenplays; <strong>Brad Pitt</strong> and <strong>George Clooney</strong> for producing). However, they're only considered here if they won an acting award.</li>
+<li>Similarly, I'm only counting people who were acting in the film. For example, <em>Into the Wild</em> was directed by two-time Oscar-winner <strong>Sean Penn</strong>, but he doesn't appear in the movie.</li>
+<li>No double-counting. Forty actors have multiple acting Academy Awards (<strong>Katharine Hepburn</strong> leads the pack with four), but each actor counts only once as an Oscar-winner for any given film.</li>
+<li>Roles credited as appearing as himself/herself are not counted, mostly because they're separately stored in IMDb.</li>
+<li>This only includes theatrically-released films. That excludes TV series, made-for-TV, and direct-to-video movies.</li>
+<li>I'm giving credit for someone winning an Academy Award <em>at any point in their career</em>. This means a person didn't have to win their Oscar prior to (or as a result of) the film in question. So <em>The Sound of Music</em>, for example, has two Oscar-winners (<strong>Julie Andrews</strong> and <strong>Christopher Plummer</strong>), even though only Andrews had an Oscar prior to the movie's release in 1965.</li>
+</ul>
+<p>The data source I used is the <a href="http://www.imdb.com/">Internet Movie Database (IMDb)</a>, which had more than 5.4 million actors and 17 million movies/TV shows as of 2016. There's a Python wrapper to access the database called <a href="http://imdbpy.sourceforge.net/">IMDbPY</a>. The package has some frustrating limitations, but it was enough to answer my question. </p>
+<p>I also needed a list of all Oscar winners. I used the <a href="http://awardsdatabase.oscars.org">official database</a> from the Academy of Motion Pictures Arts and Sciences. I did a "Basic Search" with Award Category "Acting ...(all)" and selected "Winners Only". </p>
+<p>All my code and data are available <a href="https://gist.github.com/willettk/f6850049e279ec1775c8">here</a> as a Jupyter notebook. Snippets below show my final results.</p>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">final_counts</span><span class="p">[</span><span class="nb">max</span><span class="p">(</span><span class="n">final_counts</span><span class="o">.</span><span class="n">keys</span><span class="p">())]:</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">print</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&quot;{0}&quot;&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">films</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[</span><span class="n">title</span><span class="p">]:</span>
+        <span class="k">print</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">{0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">films</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>&quot;Around the World in Eighty Days&quot;
+    Charles Coburn
+    John Mills
+    Ronald Colman
+    Frank Sinatra
+    Victor McLaglen
+    John Gielgud
+    Shirley MacLaine
+    David Niven
+
+&quot;The Greatest Story Ever Told&quot;
+    Joseph Schildkraut
+    José Ferrer
+    Martin Landau
+    Shelley Winters
+    John Wayne
+    Charlton Heston
+    Van Heflin
+    Sidney Poitier
+
+&quot;Hamlet&quot;
+    Robin Williams
+    John Mills
+    Jack Lemmon
+    Kate Winslet
+    Julie Christie
+    Judi Dench
+    John Gielgud
+    Charlton Heston
+</pre></div>
+
+
+<p>So the answer is <strong>eight Oscar winners in one film</strong>. It's a three-way tie between <em>Around the World in Eighty Days</em>, <em>The Greatest Story Ever Told</em>, and <em>Hamlet</em>. </p>
+<p><img alt="png" src="images/eight.png" /></p>
+<h3><em>Around the World in Eighty Days</em> (1956)</h3>
+<p><em>Around the World in Eighty Days</em> won Best Picture in 1956, beating both <em>The Ten Commandments</em> and <em>The King and I</em>. The film was notable for the huge number of cameos, with over forty celebrities making short appearances. <strong>David Niven</strong> and <strong>Shirley MacLaine</strong> are the only two Oscar winners in this film that actually have significant screen time. Almost the entire cast is long-since retired or passed away in the sixty years since the movie was released, so it's almost certain to stay at its current number of Oscar-winners.</p>
+<p>Of the eight Oscar-winners, four (<strong>Colman, Coburn, Sinatra, McLaglen</strong>) had already won their award by the time they appeared in the film, and four (<strong>Niven, MacLaine, Gielgud, Mills</strong>) won their award afterwards. </p>
+<h3><em>The Greatest Story Ever Told</em> (1965)</h3>
+<p><em>The Greatest Story Ever Told</em> also had a very large cast, although <strong>Charlton Heston</strong>, <strong>José Ferrer</strong>, <strong>Martin Landau</strong>, and <strong>Joseph Schildkraut</strong> all had significant, non-cameo parts. It was nominated for five Oscars, but ended up winning none (and wasn't even nominated for Best Picture). Lead actor <strong>Max von Sydow</strong> is still active, though well into his eighties, and was nominated for his second Academy Award in 2012. <strong>Angela Lansbury</strong> also appeared in the film and has been nominated for Best Supporting Actress three times. Either could possibly still push this film to a record nine.</p>
+<p>Of the eight Oscar-winners, five (<strong>Heston, Ferrer, Schildkraut, Heflin, Poitier</strong>) had already won their award by the time they appeared in the film, and two (<strong>Landau, Wayne</strong>) won their award afterwards. <strong>Shelley Winters</strong> won two Oscars, one before and one after appearing in this film.  </p>
+<h3><em>Hamlet</em> (1996)</h3>
+<p><em>Hamlet</em> was nominated for four Oscars; it won zero and wasn't nominated for Best Picture. <strong>Richard Attenborough</strong> appeared in the film and did win an Oscar, but for directing (<em>Gandhi</em> in 1983). Director and star <strong>Kenneth Branagh</strong> has been nominated for five Oscars in his career, including two for acting, but he has yet to win. He could potentially make this movie the lone recordholder someday.</p>
+<p>Of the eight Oscar-winners, five (<strong>Christie, Gielgud, Heston, Lemmon, Mills</strong>) had already won their award by the time they appeared in the film, and three (<strong>Dench, Williams, Winslet</strong>) won their award afterwards. </p>
+<p>Finally, it's interesting that none of these three movies, crammed to the brim with award-winners and future award-winners, had an Oscar-winning performance in their own film.</p>
+<h3>The runners-up</h3>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">nmax</span><span class="p">,</span><span class="n">nlim</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+    <span class="n">mt</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">final_counts</span><span class="p">[</span><span class="n">n</span><span class="p">]]</span>
+    <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">{0:2d} films have {1} Oscar-winning actors in them:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">mt</span><span class="p">),</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">mts</span> <span class="ow">in</span> <span class="n">mt</span><span class="p">:</span>
+        <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mts</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>     6 films have 7 Oscar-winning actors in them:
+        Main Street to Broadway
+        The Stolen Jools
+        How the West Was Won
+        Pepe
+        In This Our Life
+        The Swarm
+    13 films have 6 Oscar-winning actors in them:
+        Breakdowns of 1938
+        Gone with the Wind
+        Prêt-à-Porter
+        Murder on the Orient Express
+        A Time to Kill
+        Ben-Hur: A Tale of the Christ
+        The Good Shepherd
+        A Bridge Too Far
+        Variety Girl
+        Forever and a Day
+        The Longest Day
+        The First Wives Club
+        Nine
+</pre></div>
+
+
+<p>Some notes on the runners-up:</p>
+<ul>
+<li>None of the films with seven Oscar-winning actors have good odds to increase their count. <em>The Swarm</em> (1978) is the only movie in the set made after 1962, meaning almost all cast members from these films are either retired or dead. </li>
+<li>Of the films with six Oscar-winning actors, <em>The First Wives Club</em> (1996), <em>A Time to Kill</em> (1996), <em>The Good Shepherd</em> (2006), and <em>Nine</em> (2009) were all released in the last twenty years. Many actors in the casts could have long and possibly Oscar-winning careers still ahead of them.</li>
+<li><strong>Cher</strong> appeared as herself in the movie <em>Prêt-à-Porter</em> [released as <em>Ready to Wear (Prêt-à-Porter)</em> in the US]. If this were counted as an acting role, it would bring the total number of Oscar-winning actors up to seven. </li>
+<li>The film <em>Nine</em> was heavily marketed during its release as starring six actors who had <em>already</em> won Oscars: <strong>Daniel Day-Lewis</strong>, <strong>Sophia Loren</strong>, <strong>Marion Cotillard</strong>, <strong>Penelope Cruz</strong>, <strong>Nicole Kidman</strong>, and <strong>Judi Dench</strong>. I think that's the record for award-winners at the time of filming, but I haven't explicitly verified it.</li>
+</ul>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="./tag/oscars.html">oscars</a>
+      <a href="./tag/movies.html">movies</a>
+      <a href="./tag/imdb.html">imdb</a>
+      <a href="./tag/python.html">python</a>
+    </p>
+  </div>
+
+
+
+</article>
+
+    <footer>
+<p>
+  &copy; Kyle Willett 2016 - This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>
+</p>
+<p>    Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a rel="license"
+     href="http://creativecommons.org/licenses/by-sa/4.0/"
+     target="_blank">
+    <img alt="Creative Commons License"
+         title="Creative Commons License"
+         style="border-width:0"
+         src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png"
+         width="80"
+         height="15"/>
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Kyle Willett - Blog ",
+  "url" : ".",
+  "image": "",
+  "description": "Projects and Diversions of Kyle Willett"
+}
+</script>
+</body>
+</html>
